@@ -1,5 +1,5 @@
 import { app, shell, BrowserWindow } from 'electron'
-import * as path from 'path'
+import * as path from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 
 function createWindow(): void {
@@ -38,9 +38,9 @@ function createWindow(): void {
   }
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+if (process.platform === 'darwin') {
+  app.dock.setIcon(path.resolve(__dirname, 'icon.png'))
+}
 
 // whenReady e bem parecido com o document.onLoading
 app.whenReady().then(() => {
@@ -72,6 +72,3 @@ app.on('window-all-closed', () => {
     // quando todas as janelas tiverem fechada e for diferente macos fecha o app
   }
 })
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
