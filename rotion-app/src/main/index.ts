@@ -11,13 +11,13 @@ function createWindow(): void {
     autoHideMenuBar: true,
     ...(process.platform === 'linux'
       ? {
-          icon: path.join(__dirname, '../../build/icon.png')
+          icon: path.join(__dirname, '../../build/icon.png'),
         }
       : {}),
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
-      sandbox: false
-    }
+      sandbox: false,
+    },
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -31,8 +31,8 @@ function createWindow(): void {
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  if (is.dev && process.env.ELECTRON_RENDERER_URL) {
+    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
     mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
   }
@@ -42,7 +42,7 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 
-//whenReady e bem parecido com o document.onLoading
+// whenReady e bem parecido com o document.onLoading
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
@@ -60,7 +60,7 @@ app.whenReady().then(() => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })//sistema de mac ficar aberto mais ta fechado
+  }) // sistema de mac ficar aberto mais ta fechado
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -69,7 +69,7 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
-    //quando todas as janelas tiverem fechada e for diferente macos fecha o app
+    // quando todas as janelas tiverem fechada e for diferente macos fecha o app
   }
 })
 
