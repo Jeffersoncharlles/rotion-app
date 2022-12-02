@@ -15,6 +15,11 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
   },
   renderer: {
+    define: {
+      'process.platform': JSON.stringify(process.platform),
+      //ou seja to pegando a variável e jogando dentro
+    },
+
     // config tailwind start
     css: {
       postcss: {
