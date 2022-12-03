@@ -1,5 +1,6 @@
 import { app, shell, BrowserWindow } from 'electron'
 import * as path from 'node:path'
+import { createFileRoute, createURLRoute } from 'electron-router-dom'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 
 function createWindow(): void {
@@ -35,12 +36,20 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
+  //electron router dom
+  const devServerURL = createURLRoute(process.env['ELECTRON_RENDERER_URL']!, 'main')
+  const fileRoute = createFileRoute(
+    path.join(__dirname, '../renderer/index.html'),
+    'main'
+  )
+
+
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
-    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
+    //carregar a pagina em dev
+    mainWindow.loadURL(devServerURL)
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
+    //carregar em produção
+    mainWindow.loadFile(...fileRoute)
   }
 }
 
@@ -50,12 +59,8 @@ if (process.platform === 'darwin') {
 
 // whenReady e bem parecido com o document.onLoading
 app.whenReady().then(() => {
-  // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
-  // Default open or close DevTools by F12 in development
-  // and ignore CommandOrControl + R in production.
-  // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
@@ -63,14 +68,11 @@ app.whenReady().then(() => {
   createWindow()
 
   app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   }) // sistema de mac ficar aberto mais ta fechado
 })
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
