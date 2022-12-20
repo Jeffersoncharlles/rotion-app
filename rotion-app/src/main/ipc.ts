@@ -60,7 +60,7 @@ ipcMain.handle(
   async (_, { id }: DeleteDocumentRequest): Promise<void> => {
 
     //@ts-ignore //error lib
-    store.delete(`document.${id}`)
+    store.delete(`documents.${id}`)
   }
 )
 //==========================================================================================//
