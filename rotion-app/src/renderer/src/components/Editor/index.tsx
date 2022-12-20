@@ -6,11 +6,17 @@ import Typography from "@tiptap/extension-typography";
 import { EditorContent ,useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
-interface EditorProps{
+export interface OnContentUpdateParams {
+  title: string
   content: string;
 }
 
-export const Editor = ({ content }: EditorProps) => {
+interface EditorProps{
+  content: string;
+  onContentUpdate: (params: OnContentUpdateParams)=>void
+}
+
+export const Editor = ({ content ,onContentUpdate}: EditorProps) => {
 
 
 
@@ -33,6 +39,20 @@ export const Editor = ({ content }: EditorProps) => {
         emptyEditorClass:'before:content-[attr(data-placeholder)] before:text-gray-500 before:h-0 before:float-left before:pointer-events-none',
       }),
     ],
+    onUpdate: ({ editor }) => {
+      const contentRegex = /^(<h1>(?<title>.+)<\/h1>(?<content>.+)?)$/
+      const parsedContent = editor.getHTML().match(contentRegex)?.groups
+
+      const title = parsedContent?.title ?? 'Untitled'
+
+      const content = parsedContent?.content ?? ''
+
+      onContentUpdate({
+        title,
+        content
+      })
+
+    },
     content,
     autofocus: 'end',
     editorProps: {
