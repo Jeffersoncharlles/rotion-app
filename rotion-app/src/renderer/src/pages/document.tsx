@@ -1,9 +1,27 @@
-import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Editor } from "../components/Editor";
 import   {ToC} from '../components/ToC'
 
 
 export const Document = () => {
+  const { id } = useParams<{ id: string }>()
+
+  //isFetching sempre que mudar o id ele vai mudar true ou false
+  const { data,isFetching } = useQuery(['documents', id], async () => {
+    const response = await window.api.fetchDocument({ id: id! })
+    return response.data
+  })
+
+  const initialContent = useMemo(() => {
+    if (data) {
+      return `<h1>${data.title}</h1>${data.content ?? '<p></p>'}`
+    }
+
+    return '';
+
+  },[data])//valor so seja alterado quando a  data mudar
 
   return (
     <main className='flex-1 flex py-12 px-10 gap-8'>
@@ -20,7 +38,7 @@ export const Document = () => {
       </aside>
 
       <section className="flex-1 leading-relaxed flex flex-col items-center">
-       <Editor />
+        {!isFetching && data && <Editor content={initialContent} />}
       </section>
     </main>
   );

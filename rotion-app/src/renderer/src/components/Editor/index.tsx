@@ -6,9 +6,14 @@ import Typography from "@tiptap/extension-typography";
 import { EditorContent ,useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
+interface EditorProps{
+  content: string;
+}
+
+export const Editor = ({ content }: EditorProps) => {
 
 
-export const Editor = () => {
+
   const editor = useEditor({
     extensions: [
       Document.extend({
@@ -28,7 +33,7 @@ export const Editor = () => {
         emptyEditorClass:'before:content-[attr(data-placeholder)] before:text-gray-500 before:h-0 before:float-left before:pointer-events-none',
       }),
     ],
-    // content: '<h1>Back-end</h1><p>Esse e o documento que explica sobre back-end.</p>',
+    content,
     autofocus: 'end',
     editorProps: {
       attributes: {
