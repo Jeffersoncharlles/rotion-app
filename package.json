@@ -1,10 +1,10 @@
 {
   "name": "rotion-app",
   "productName": "Rotion",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Notion alternative written with electron",
   "main": "./out/main/index.js",
-  "author": "jefferdeveloper.com.br",
+  "author": "jefferdeveloper <contato@jefferdeveloper.com>",
   "homepage": "https://www.jefferdeveloper/rotion.com",
   "scripts": {
     "format": "prettier --write .",
@@ -19,14 +19,15 @@
     "release": "electron-builder --publish always"
   },
    "build": {
-   "appId": "com.jefferdeveloper.${name}",
+   "appId": "com.jefferdeveloper.rotion-app",
    "win": {
      "target": "nsis",
      "icon": "resources/icon.ico"
    },
    "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ]
     }
   },
