@@ -29,7 +29,6 @@ dmg:
 linux:
   target:
     - AppImage
-    - deb
   maintainer: jefferdeveloper.com.br
   synopsis: ${description}
   category: Utility
