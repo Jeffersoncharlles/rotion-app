@@ -6,6 +6,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import './ipc'
 import './store'
 import { createTray } from './tray'
+import { createShortcuts } from './shortcuts'
 
 
 function createWindow(): void {
@@ -34,6 +35,9 @@ function createWindow(): void {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
   createTray(mainWindow) //menu tray icon lado do relógio
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+  createShortcuts(mainWindow) //criar atalhos ou hotkeys
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 
