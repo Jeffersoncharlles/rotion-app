@@ -5,7 +5,8 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 
 import './ipc'
 import './store'
-import './ipc'
+import { createTray } from './tray'
+
 
 function createWindow(): void {
   // Create the browser window.
@@ -31,6 +32,9 @@ function createWindow(): void {
     },
   })
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+  createTray(mainWindow) //menu tray icon lado do relógio
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 
   mainWindow.on('ready-to-show', () => {
