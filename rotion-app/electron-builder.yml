@@ -1,4 +1,4 @@
-appId: com.electron.app
+appId: com.jefferdeveloper.rotion
 productName: rotion-app
 directories:
   buildResources: build
@@ -10,7 +10,6 @@ files:
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - '**/*.{node,dll}'
-afterSign: build/notarize.js
 win:
   executableName: rotion-app
 nsis:
@@ -18,6 +17,7 @@ nsis:
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
+  icon: build/icon.ico
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
@@ -30,13 +30,13 @@ dmg:
 linux:
   target:
     - AppImage
-    - snap
     - deb
-  maintainer: electronjs.org
+    - rpm
+    - pacman
+    - freebsd
+  maintainer: jefferdeveloper.com
+  synopsis: ${description}
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates

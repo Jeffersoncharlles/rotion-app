@@ -20,7 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "baseUrl": ".",
-    ///extra for electron
     "paths": {
       "~/*": [
         "./*"
