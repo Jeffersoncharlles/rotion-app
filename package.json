@@ -1,10 +1,10 @@
 {
   "name": "rotion-app",
   "productName": "Rotion",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Notion alternative written with electron",
   "main": "./out/main/index.js",
-  "author": "jeffersoncharlles",
+  "author": "jefferdeveloper.com.br",
   "homepage": "https://www.jefferdeveloper/rotion.com",
   "scripts": {
     "format": "prettier --write .",

@@ -30,7 +30,7 @@ linux:
   target:
     - AppImage
     - deb
-  maintainer: com.jefferdeveloper.rotion
+  maintainer: jefferdeveloper.com.br
   synopsis: ${description}
   category: Utility
 appImage:
