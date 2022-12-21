@@ -28,9 +28,9 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu-latest')
         run: sudo apt autoremove
 
-      - name: Install libarchive rpm on Linux
+      - name: Install libarchive on Linux
         if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get install libarchive-tools rpm
+        run: sudo apt-get install libarchive-tools
 
       - name: Release Electron app
         uses: samuelmeuli/action-electron-builder@v1

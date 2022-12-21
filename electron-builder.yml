@@ -30,9 +30,6 @@ linux:
   target:
     - AppImage
     - deb
-    - rpm
-    - pacman
-    - freebsd
   maintainer: com.jefferdeveloper.rotion
   synopsis: ${description}
   category: Utility

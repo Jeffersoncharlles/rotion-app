@@ -1,7 +1,7 @@
 {
   "name": "rotion-app",
   "productName": "Rotion",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A Notion alternative written with electron",
   "main": "./out/main/index.js",
   "author": "jeffersoncharlles",
@@ -17,6 +17,19 @@
     "build:mac": "electron-vite build && electron-builder --mac --config",
     "build:linux": "electron-vite build && electron-builder --linux --config",
     "release": "electron-builder --publish always"
+  },
+   "build": {
+   "appId": "com.jefferdeveloper.${name}",
+   "win": {
+     "target": "nsis",
+     "icon": "resources/icon.ico"
+   },
+   "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.2",
